@@ -31,6 +31,7 @@ public class Application {
 
         return args -> {
             ChatClient chatClient = chatClientBuilder
+                    .defaultSystem("When calling Skills, the toolname is \"Skill\"")
                     .defaultToolCallbacks(
                             SkillsTool.builder().addSkillsResources(skillPaths).build()
                     )
