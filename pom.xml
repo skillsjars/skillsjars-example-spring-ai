@@ -42,8 +42,8 @@
 
 		<dependency>
 			<groupId>com.skillsjars</groupId>
-			<artifactId>browser-use__browser-use__browser-use</artifactId>
-			<version>2026_02_23-1d154e1</version>
+			<artifactId>anthropics__skills__internal-comms</artifactId>
+			<version>2026_02_06-1ed29a0</version>
 		</dependency>
 	</dependencies>
 
