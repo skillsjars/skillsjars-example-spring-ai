@@ -3,6 +3,8 @@ package org.springaicommunity.agent;
 import java.util.List;
 import java.util.Scanner;
 
+import org.springaicommunity.agent.tools.FileSystemTools;
+import org.springaicommunity.agent.tools.ShellTools;
 import org.springaicommunity.agent.tools.SkillsTool;
 
 import org.springframework.ai.chat.client.ChatClient;
@@ -31,6 +33,10 @@ public class Application {
             ChatClient chatClient = chatClientBuilder
                     .defaultToolCallbacks(
                             SkillsTool.builder().addSkillsResources(skillPaths).build()
+                    )
+                    .defaultTools(
+                            ShellTools.builder().build(),
+                            FileSystemTools.builder().build()
                     )
                     .defaultAdvisors(
                             ToolCallAdvisor.builder()

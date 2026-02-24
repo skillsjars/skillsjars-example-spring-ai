@@ -42,7 +42,7 @@
 
 		<dependency>
 			<groupId>com.skillsjars</groupId>
-			<artifactId>anthropics__skills__internal-comms</artifactId>
+			<artifactId>anthropics__skills__pdf</artifactId>
 			<version>2026_02_06-1ed29a0</version>
 		</dependency>
 	</dependencies>

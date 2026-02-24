@@ -12,4 +12,4 @@ The example uses the [Antropic internal-comms](https://github.com/anthropics/ski
     export AWS_BEARER_TOKEN_BEDROCK=<YOUR BEDROCK API KEY>
     ./mvnw spring-boot:run
     ```
-3. Ask a question like `write a trip report about Josh Long & James Ward presenting about Spring AI at DevNexus 2026.`
+3. Ask a question like `use the pdf skill to create a pdf that contains the current directory listing`
