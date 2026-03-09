@@ -14,6 +14,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
 @SpringBootApplication
@@ -24,29 +25,22 @@ public class Application {
     }
 
     @Bean
-    CommandLineRunner commandLineRunner(
-            ChatClient.Builder chatClientBuilder,
-            @Value("${agent.skills.paths}") List<Resource> skillPaths
-    ) {
+    CommandLineRunner commandLineRunner(ChatClient.Builder chatClientBuilder) {
 
         return args -> {
+            var skillsTool = SkillsTool.builder()
+                    .addSkillsResource(new ClassPathResource("/META-INF/skills")).build();
+            System.out.println(skillsTool.getToolDefinition());
+            System.out.println(skillsTool.getToolMetadata());
+
             ChatClient chatClient = chatClientBuilder
-                    .defaultSystem("When calling Skills, the toolname is \"Skill\"")
-                    .defaultToolCallbacks(
-                            SkillsTool.builder().addSkillsResources(skillPaths).build()
-                    )
-                    .defaultTools(
-                            ShellTools.builder().build(),
-                            FileSystemTools.builder().build()
-                    )
+//                    .defaultSystem("When calling Skills, the toolname is \"Skill\"")
+                    .defaultToolCallbacks(skillsTool)
                     .defaultAdvisors(
                             ToolCallAdvisor.builder()
                                     .conversationHistoryEnabled(true)
                                     .build(),
-                            MyLoggingAdvisor.builder()
-                                    .showAvailableTools(true)
-                                    .showSystemMessage(true)
-                                    .build()
+                            MyLoggingAdvisor.builder().build()
                     )
                     .build();
 

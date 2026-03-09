@@ -41,9 +41,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.skillsjars</groupId>
-			<artifactId>anthropics__skills__pdf</artifactId>
-			<version>2026_02_06-1ed29a0</version>
+			<groupId>com.jamesward</groupId>
+			<artifactId>pooch-palace</artifactId>
+			<version>0.0.1</version>
 		</dependency>
 	</dependencies>
 
