@@ -30,14 +30,16 @@ public class Application {
     ) {
 
         return args -> {
+            var skillsTool = SkillsTool.builder().addSkillsResources(skillPaths).build();
+            System.out.println(skillsTool.getToolDefinition());
+
             ChatClient chatClient = chatClientBuilder
                     .defaultSystem("When calling Skills, the toolname is \"Skill\"")
-                    .defaultToolCallbacks(
-                            SkillsTool.builder().addSkillsResources(skillPaths).build()
-                    )
                     .defaultTools(
-                            ShellTools.builder().build(),
-                            FileSystemTools.builder().build()
+                            t -> t.callbacks(skillsTool).instances(
+                                    ShellTools.builder().build(),
+                                    FileSystemTools.builder().build()
+                            )
                     )
                     .defaultAdvisors(
                             ToolCallAdvisor.builder()

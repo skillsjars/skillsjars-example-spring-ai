@@ -1,3 +1,6 @@
 /.idea/
 /target/
 
+/.agents/
+/.junie/
+/.kiro/

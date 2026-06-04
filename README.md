@@ -2,7 +2,7 @@
 
 This example shows how to use the Spring AI [Agent Utils](https://github.com/spring-ai-community/spring-ai-agent-utils) library with [SkillsJars](https://www.skillsjars.com) to give an AI Agent access to dependency-defined Agent Skills.
 
-The example uses the [Antropic internal-comms](https://github.com/anthropics/skills/tree/main/skills/internal-comms) Agent Skill.
+The example uses the [Antropic pdf](https://github.com/anthropics/skills/tree/main/skills/pdf) Agent Skill.
 
 ## Running the Example
 
@@ -13,3 +13,12 @@ The example uses the [Antropic internal-comms](https://github.com/anthropics/ski
     ./mvnw spring-boot:run
     ```
 3. Ask a question like `use the pdf skill to create a pdf that contains the current directory listing`
+
+## SkillsJars for AI Code Assistants
+
+This project also includes two SkillsJars that can be used with AI Code Assistants / Agents.
+
+You can extract the SkillsJars to a directory which your agent uses for Skills, i.e.
+```
+./mvnw skillsjars:extract -Ddir=.agents/skills
+```
