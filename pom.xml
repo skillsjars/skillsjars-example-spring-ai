@@ -70,7 +70,7 @@
 			<plugin>
 				<groupId>com.skillsjars</groupId>
 				<artifactId>maven-plugin</artifactId>
-				<version>0.0.6</version>
+				<version>0.0.7</version>
 				<dependencies>
 					<!-- SkillsJars for AI Code Agents -->
 					<dependency>
