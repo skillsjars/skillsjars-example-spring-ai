@@ -3,12 +3,13 @@ package org.springaicommunity.agent;
 import java.util.List;
 import java.util.Scanner;
 
+import org.springaicommunity.agent.exec.LocalExecBackend;
 import org.springaicommunity.agent.tools.FileSystemTools;
 import org.springaicommunity.agent.tools.ShellTools;
 import org.springaicommunity.agent.tools.SkillsTool;
 
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.client.advisor.ToolCallAdvisor;
+import org.springframework.ai.chat.client.advisor.ToolCallingAdvisor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -26,23 +27,28 @@ public class Application {
     @Bean
     CommandLineRunner commandLineRunner(
             ChatClient.Builder chatClientBuilder,
-            @Value("${agent.skills.paths}") List<Resource> skillPaths
+            @Value("${agent.skills.paths}") List<Resource> skillPaths,
+            @Value("${agent.shell.command}") List<String> shellCommand
     ) {
 
         return args -> {
             var skillsTool = SkillsTool.builder().addSkillsResources(skillPaths).build();
+            var shellTools = ShellTools.builder()
+                    .execBackend(LocalExecBackend.builder()
+                            .shellCommand(shellCommand.toArray(String[]::new))
+                            .build())
+                    .build();
             System.out.println(skillsTool.getToolDefinition());
 
             ChatClient chatClient = chatClientBuilder
                     .defaultSystem("When calling Skills, the toolname is \"Skill\"")
                     .defaultTools(
-                            t -> t.callbacks(skillsTool).instances(
-                                    ShellTools.builder().build(),
-                                    FileSystemTools.builder().build()
-                            )
+                            skillsTool,
+                            shellTools,
+                            FileSystemTools.builder().build()
                     )
                     .defaultAdvisors(
-                            ToolCallAdvisor.builder()
+                            ToolCallingAdvisor.builder()
                                     .conversationHistoryEnabled(true)
                                     .build(),
                             MyLoggingAdvisor.builder()
