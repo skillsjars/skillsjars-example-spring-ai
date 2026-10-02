@@ -3,4 +3,8 @@
 
 /.agents/
 /.junie/
-/.kiro/
+/.kiro/*
+!/.kiro/settings/
+/.kiro/settings/*
+!/.kiro/settings/mcp.json
+/.claude/settings.local.json
